@@ -231,6 +231,52 @@ $(document).ready(function()
     })
 
 
+    	// Custom JS
+
+	// Find the college question code and value in the URL
+	var findCollege = function() {
+      		let search 	= location.search.substr(1);
+		let params 	= search.split("&");
+
+		do {
+		  	let param = params.pop();
+			let buff  = param.split("=");
+			var key   = buff[0];
+			var val   = buff[1];
+		} 
+		while (["lang", "token"].indexOf(key) > -1);
+
+		return {
+			"key":		key,
+			"val":		val,
+		};
+    	}
+    	var college = findCollege();
+
+	// Set up a debugging div as console.log() is not working
+	var DEBUG_DIV 	= document.createElement("div");
+	const DEBUG 	= true;
+
+	if (DEBUG) {
+		var debugOn	= function() {
+			DEBUG_DIV.setAttribute("id", "debug");
+			document.body.appendChild(DEBUG_DIV);
+		}
+		debugOn();
+
+		var consoleLog 	= function(str) {
+			const div 	= document.createElement("div");
+			const textnode 	= document.createTextNode(str); 
+			div.appendChild(textnode);  
+			DEBUG_DIV.appendChild(div);	
+		}
+
+		// consoleLog(college.key);	
+		// consoleLog(college.val);	
+	}
+
+	// Hide disturbing navbar
+	document.getElementById("navbar").remove();
 });
 
 
